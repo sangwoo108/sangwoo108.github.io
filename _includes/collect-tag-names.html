@@ -1,0 +1,6 @@
+{% assign tagNames = "" %}
+{% for post in site.posts %}
+  {% assign ttags = post.tags | join:'|' | append:'|' %}
+  {% assign tagNames = tagNames | append:ttags %}
+{% endfor %}
+{% assign tagNames = tagNames | split:'|' | sort %}

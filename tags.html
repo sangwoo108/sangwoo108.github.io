@@ -1,0 +1,17 @@
+---
+layout: default
+---
+<div class="post">
+{% include collect-tag-names.html %}
+{% for tagName in tagNames %}
+  <h2><a name="{{ tagName }}">{{ tagName }}</a></h2>
+  <ul>
+  {% for post in site.tags[tagName] %}
+    <li><a href="{{ post.url }}">{{ post.title }}</a> <i style="margin-left: 1em; color: #737373; line-height: 1.8em;font-weight: 200;">{{ post.date | date_to_string }}</i><br>
+      {{ post.description }}
+    </li>
+  {% endfor %}
+  </ul>
+{% endfor %}
+</div>
+<hr>
