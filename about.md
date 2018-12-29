@@ -1,7 +1,10 @@
 ---
 layout: page
-title: About Me
+title: About
 ---
-## About
+### Software engineer
+* Naver Whale browser UI developer
+* Chromium committer
 
-## Features
+### Contact
+* sangwoo108@gmail.com
