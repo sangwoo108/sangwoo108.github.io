@@ -9,5 +9,14 @@ layout: default
 		{{ content }}
 		
 	</div>
-</article>
+	<!-- Reveal categories -->
+	{% for category in page.categories %}
+		<!-- TODO:move style to CSS -->
+		<span><a style="font-size: 9pt; color:teal; padding: 0.5em;" href="/categories#{{ tag }}">{{ category }}/</a></span>
+	{% endfor %}
 
+	{% for tag in page.tags %}
+		<!-- TODO:move style to CSS -->
+		<span><a style="font-size: 9pt; color:white; background-color: lightslategray; border-radius: 0.2em; padding: 0.5em;" href="/tags#{{ tag }}">{{ tag }}</a></span>
+	{% endfor %}
+</article>

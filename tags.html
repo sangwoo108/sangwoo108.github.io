@@ -1,10 +1,18 @@
 ---
 layout: default
+title: Tags
 ---
-<div class="post">
-{% include collect-tag-names.html %}
-{% for tagName in tagNames %}
-  <h2><a name="{{ tagName }}">{{ tagName }}</a></h2>
+<!-- Collect tags and dedupe -->
+{% assign sortedTags = "" %}
+{% for post in site.posts %}
+  {% assign tagsInPost = post.tags | join:'|' | append:'|' %}
+  {% assign sortedTags = sortedTags | append:tagsInPost %}
+{% endfor %}
+{% assign sortedTags = sortedTags | split:'|' | sort %}
+
+<!-- Show tags and related posts -->
+{% for tagName in sortedTags %}
+  <h2><a name="{{ tagName }}" style="background-color: lightslategray; color: white; padding: 0.2em; border-radius: 0.1em;">{{ tagName }}</a></h2>
   <ul>
   {% for post in site.tags[tagName] %}
     <li><a href="{{ post.url }}">{{ post.title }}</a> <i style="margin-left: 1em; color: #737373; line-height: 1.8em;font-weight: 200;">{{ post.date | date_to_string }}</i><br>
@@ -13,5 +21,3 @@ layout: default
   {% endfor %}
   </ul>
 {% endfor %}
-</div>
-<hr>

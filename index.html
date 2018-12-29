@@ -2,15 +2,21 @@
 layout: default
 ---
 <!-- Posts -->
+<h2> Posts</h2>
 <ul id="posts">
 
 	{% for post in paginator.posts %}
 
-	  <li class="post">
-	  	<h2><a href="{% if site.baseurl == "/" %}{{ post.url }}{% else %}{{ post.url | prepend: site.baseurl }}{% endif %}">{%if post.header %}{{ post.header }}{% else %}{{ post.title }}{% endif %}</a></h2>
-      <time datetime="{{ post.date | date_to_xmlschema }}" class="by-line"> <i>{{ post.date | date_to_string }}</i> </time>
-	  	<p>{{ post.content | strip_html | truncatewords:50 }}</p>
-	  </li>
+	<li class="post">
+		{% for category in post.categories %}
+			<a style="color:teal" href="/categories#{{ category }}">{{ category }}/ </a>
+		{% endfor %}
+		<a href="{% if site.baseurl == "/" %}{{ post.url }}{% else %}{{ post.url | prepend: site.baseurl }}{% endif %}">
+			<h3 style="display: inline">{%if post.header %}{{ post.header }}{% else %}{{ post.title }}{% endif %}</h3>
+			<span style="font-weight: 200"> - {{ post.description }}</span>
+			<time style="display:inline; margin-left: 0.5em" datetime="{{ post.date | date_to_xmlschema }}" class="by-line"> <i>{{ post.date | date_to_string }}</i></time>
+		</a>
+	</li>
 
     {% endfor %}
 

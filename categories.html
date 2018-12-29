@@ -1,0 +1,23 @@
+---
+layout: default
+title: Categories
+---
+<!-- Collect categories and dedupe -->
+{% assign sortedCategories = "" %}
+{% for post in site.posts %}
+  {% assign CategoriesInPost = post.categories | join:'|' | append:'|' %}
+  {% assign sortedCategories = sortedCategories | append:CategoriesInPost %}
+{% endfor %}
+{% assign sortedCategories = sortedCategories | split:'|' | sort %}
+
+<!-- Show categories and related posts -->
+{% for category in sortedCategories %}
+  <h2><a name="{{ category }}" style="color:teal">{{ category }}/</a></h2>
+  <ul>
+  {% for post in site.categories[category] %}
+    <li><a href="{{ post.url }}">{{ post.title }}</a> <i style="margin-left: 1em; color: #737373; line-height: 1.8em;font-weight: 200;">{{ post.date | date_to_string }}</i><br>
+      {{ post.description }}
+    </li>
+  {% endfor %}
+  </ul>
+{% endfor %}
